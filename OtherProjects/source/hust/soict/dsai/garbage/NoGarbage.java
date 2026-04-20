@@ -1,0 +1,34 @@
+package hust.soict.dsai.garbage;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class NoGarbage {
+    public static void main(String[] args) {
+        String filename = "test.txt";
+        byte[] inputBytes = { 0 };
+        long startTime, endTime;
+
+        try {
+            inputBytes = Files.readAllBytes(Paths.get(filename));
+        } catch (Exception e) {
+            System.out.println("Không tìm thấy file!");
+            return;
+        }
+
+        startTime = System.currentTimeMillis();
+
+//       String outputString = "";
+//       for (byte b : inputBytes) {
+//          outputString += (char)b;
+//       }
+
+        StringBuilder outputStringBuilder = new StringBuilder();
+        for (byte b : inputBytes) {
+            outputStringBuilder.append((char)b);
+        }
+
+        endTime = System.currentTimeMillis();
+        System.out.println("Thời gian không tạo rác (dùng StringBuilder): " + (endTime - startTime) + " ms");
+    }
+}
